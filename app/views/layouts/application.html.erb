@@ -4,10 +4,12 @@
     <title>QuizMaster</title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
   </head>
 
   <body>
-    <%= yield %>
+    <div id="root"></div>
   </body>
+
+  <%= javascript_include_tag assets_path('bundle.js') %>
 </html>
