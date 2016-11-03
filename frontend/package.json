@@ -1,6 +1,7 @@
 {
   "name": "quiz_master",
   "version": "0.0.1",
+  "private": true,
   "main": "index.js",
   "repository": {
     "url": "https://github.com/flada-auxv/quiz_master.git",
