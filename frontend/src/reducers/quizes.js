@@ -17,7 +17,10 @@ export default function quizes(state = initialState, action) {
         },
         ...state
       ]
-
+    case 'DELETE_QUIZ':
+      return state.filter(quiz =>
+        quiz.id !== action.id
+      )
     default:
       return state
   }
