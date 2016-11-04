@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Remarkable from 'remarkable'
 
 export default class QuizItem extends Component {
   state = {
@@ -18,6 +19,11 @@ export default class QuizItem extends Component {
   handleBlur = (e) => {
     this.setState({ editing: false })
     this.props.editQuiz(this.props.quiz.id, this.state.content, this.state.correctAnswer)
+  }
+
+  getRawHTML = (text) => {
+    const md = new Remarkable({ html: true })
+    return { __html: md.render(text) }
   }
 
   render() {
@@ -40,8 +46,8 @@ export default class QuizItem extends Component {
       element = (
         <div>
           <div onDoubleClick={this.handleDoubleClick}>
-            <div>Q: {this.state.content}</div>
-            <div>A: {this.state.correctAnswer}</div>
+            <div dangerouslySetInnerHTML={this.getRawHTML(`Q: ${this.state.content}`)} />
+            <div dangerouslySetInnerHTML={this.getRawHTML(`A: ${this.state.correctAnswer}`)} />
           </div>
           <button onClick={() => this.props.deleteQuiz(quiz.id)}>X</button>
         </div>

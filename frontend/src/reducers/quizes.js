@@ -1,8 +1,8 @@
 const initialState = [
   {
-    id: 0,
-    content: 'hi',
-    correctAnswer: '0'
+    id: 1,
+    content: 'How many letters are there in the <i>English</i> alphabet?<script>alert("hi")</script>',
+    correctAnswer: '26'
   }
 ]
 
