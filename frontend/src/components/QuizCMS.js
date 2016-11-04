@@ -10,12 +10,12 @@ export default class QuizCMS extends Component {
     return (
       <section className='main'>
         <h1>QuizMaster</h1>
+        <AddQuiz addQuiz={actions.addQuiz} />
         <div className='quiz-list'>
           {quizes.map(quiz =>
             <QuizItem key={quiz.id} quiz={quiz} {...actions} />
           )}
         </div>
-        <AddQuiz addQuiz={actions.addQuiz} />
       </section>
     )
   }

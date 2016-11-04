@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
 
-import QuizContentInput from './QuizContentInput'
-import QuizCorrectAnswerInput from './QuizCorrectAnswerInput'
-
 export default class AddQuiz extends Component {
   state = {
     content: this.props.content || '',
@@ -14,19 +11,15 @@ export default class AddQuiz extends Component {
     this.setState({ content: '', correctAnswer: '' })
   }
 
-  handleContentChange = (content) => {
-    this.setState({ content: content })
-  }
-
-  handleCorrectAnswerChange = (correctAnswer) => {
-    this.setState({ correctAnswer: correctAnswer })
+  handleChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value })
   }
 
   render() {
     return (
       <section className='add-quiz'>
-        <QuizContentInput content={this.state.content} onContentChange={this.handleContentChange}/>
-        <QuizCorrectAnswerInput correctAnswer={this.state.correctAnswer} onCorrectAnswerChange={this.handleCorrectAnswerChange} />
+        <div>Q: <input name='content' value={this.state.content} onChange={this.handleChange} /></div>
+        <div>A: <input name='correctAnswer' value={this.state.correctAnswer} onChange={this.handleChange} /></div>
         <button onClick={this.handleSave}>New Quiz</button>
       </section>
     )
