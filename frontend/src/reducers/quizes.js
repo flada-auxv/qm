@@ -17,6 +17,11 @@ export default function quizes(state = initialState, action) {
         },
         ...state
       ]
+    case 'EDIT_QUIZ':
+      return state.map(quiz =>
+        quiz.id === action.id ? { ...quiz, content: action.content, correctAnswer: action.correctAnswer } : quiz
+      )
+
     case 'DELETE_QUIZ':
       return state.filter(quiz =>
         quiz.id !== action.id
