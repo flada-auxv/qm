@@ -17,4 +17,8 @@ group :development do
   gem 'listen', '~> 3.0.5'
 end
 
+group :test do
+  gem 'rspec-rails'
+end
+
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
