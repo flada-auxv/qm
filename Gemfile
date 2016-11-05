@@ -10,6 +10,7 @@ gem 'active_model_serializers', '~> 0.10.0'
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'pry-rails'
+  gem 'factory_girl_rails'
 end
 
 group :development do
@@ -19,6 +20,7 @@ end
 
 group :test do
   gem 'rspec-rails'
+  gem 'rspec-json_matcher'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
