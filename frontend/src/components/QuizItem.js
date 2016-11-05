@@ -22,7 +22,7 @@ export default class QuizItem extends Component {
 
   handleBlur = (e) => {
     this.setState({ editing: null })
-    this.props.editQuiz(this.props.quiz.id, this.state.content, this.state.correctAnswer)
+    this.props.editQuizAsync(this.props.quiz.id, this.state.content, this.state.correctAnswer)
   }
 
   getRawHTML = (text) => {
@@ -69,7 +69,7 @@ export default class QuizItem extends Component {
                 onBlur={this.handleBlur} />
             </p>
           </div>
-          <button onClick={() => this.props.deleteQuiz(quiz.id)}>X</button>
+          <button onClick={() => this.props.deleteQuizAsync(quiz.id)}>X</button>
         </div>
       )
     } else {
@@ -79,7 +79,7 @@ export default class QuizItem extends Component {
             <div onDoubleClick={this.handleContentDoubleClick} dangerouslySetInnerHTML={this.getRawHTML(`Q: ${this.state.content}`)} />
             <div onDoubleClick={this.handleCorrectAnswerDoubleClick} dangerouslySetInnerHTML={this.getRawHTML(`A: ${this.state.correctAnswer}`)} />
           </div>
-          <button onClick={() => this.props.deleteQuiz(quiz.id)}>X</button>
+          <button onClick={() => this.props.deleteQuizAsync(quiz.id)}>X</button>
         </div>
       )
     }

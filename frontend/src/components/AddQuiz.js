@@ -7,7 +7,7 @@ export default class AddQuiz extends Component {
   }
 
   handleSave = () => {
-    this.props.addQuiz(this.state.content, this.state.correctAnswer)
+    this.props.addQuizAsync(this.state.content, this.state.correctAnswer)
     this.setState({ content: '', correctAnswer: '' })
   }
 

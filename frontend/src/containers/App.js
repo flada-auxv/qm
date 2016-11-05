@@ -7,7 +7,7 @@ import QuizCMS from '../components/QuizCMS'
 
 class App extends Component {
   componentDidMount() {
-    this.props.actions.fetchQuizzes()
+    this.props.actions.fetchQuizzesAsync()
   }
 
   render() {
