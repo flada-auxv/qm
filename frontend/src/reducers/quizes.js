@@ -1,9 +1,4 @@
 const initialState = [
-  {
-    id: 1,
-    content: 'How many letters are there in the <i>English</i> alphabet?<script>alert("hi")</script>',
-    correctAnswer: '26'
-  }
 ]
 
 export default function quizes(state = initialState, action) {
@@ -26,6 +21,8 @@ export default function quizes(state = initialState, action) {
       return state.filter(quiz =>
         quiz.id !== action.id
       )
+    case 'RECEIVE_QUIZZES':
+      return action.quizzes
     default:
       return state
   }
