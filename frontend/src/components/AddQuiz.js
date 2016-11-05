@@ -18,8 +18,8 @@ export default class AddQuiz extends Component {
   render() {
     return (
       <section className='add-quiz'>
-        <div>Q: <input name='content' value={this.state.content} onChange={this.handleChange} /></div>
-        <div>A: <input name='correctAnswer' value={this.state.correctAnswer} onChange={this.handleChange} /></div>
+        <div><p>Q: <input name='content' value={this.state.content} onChange={this.handleChange} /></p></div>
+        <div><p>A: <input name='correctAnswer' value={this.state.correctAnswer} onChange={this.handleChange} /></p></div>
         <button onClick={this.handleSave}>New Quiz</button>
       </section>
     )
