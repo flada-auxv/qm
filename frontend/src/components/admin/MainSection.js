@@ -5,14 +5,14 @@ import AddQuizItem from './AddQuizItem'
 
 export default class MainSection extends Component {
   render() {
-    const { quizes, actions } = this.props
+    const { quizzes, actions } = this.props
 
     return (
       <section className='main'>
         <h1>QuizMaster</h1>
         <AddQuizItem addQuizAsync={actions.addQuizAsync} />
         <div className='quiz-list'>
-          {quizes.map(quiz =>
+          {quizzes.map(quiz =>
             <QuizItem key={quiz.id} quiz={quiz} {...actions} />
           )}
         </div>

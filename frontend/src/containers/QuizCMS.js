@@ -13,14 +13,14 @@ class QuizCMS extends Component {
   render() {
     return (
       <div>
-        <MainSection quizes={this.props.quizes} actions={this.props.actions} />
+        <MainSection quizzes={this.props.quizzes} actions={this.props.actions} />
       </div>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  quizes: state.quizes
+  quizzes: state.quizzes
 })
 
 const mapDispatchToProps = dispatch => ({
