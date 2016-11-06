@@ -4,6 +4,10 @@ class Api::QuizzesController < ApplicationController
   # XXX: because even if send X-CSRF-Token from client, it doesn't work well...
   protect_from_forgery except: %i(create delete)
 
+  rescue_from ActiveRecord::RecordNotFound do |exception|
+    render json: {base: [exception]}, status: :not_found
+  end
+
   def index
     @quizzes = Quiz.all.order(id: :desc)
     render json: @quizzes
