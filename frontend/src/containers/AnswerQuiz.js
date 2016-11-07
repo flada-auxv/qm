@@ -81,8 +81,8 @@ class AnswerQuiz extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => (
-  {quiz: state.pickedQuiz || state.quizzes.find(elem => elem.id === parseInt(ownProps.params.quizId, 10))
-})
+  { quiz: state.pickedQuiz || state.quizzes.find(elem => elem.id === parseInt(ownProps.params.quizId, 10)) }
+)
 
 export default connect(
   mapStateToProps
