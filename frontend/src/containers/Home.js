@@ -11,11 +11,11 @@ class Home extends Component {
 
     return (
       <section className='main'>
-        <div className='quiz-list'>
+        <ul>
           {quizzes.map(quiz =>
             <QuizItem key={quiz.id} quiz={quiz} answerQuiz={actions.answerQuiz} />
           )}
-        </div>
+        </ul>
       </section>
     )
   }

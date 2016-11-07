@@ -14,9 +14,7 @@ export default class QuizItem extends Component {
 
   render() {
     return (
-      <div>
-        <div onClick={this.handleClick} dangerouslySetInnerHTML={this.getRawHTML(`Q: ${this.props.quiz.content}`)} />
-      </div>
+      <li onClick={this.handleClick} dangerouslySetInnerHTML={this.getRawHTML(this.props.quiz.content)} />
     )
   }
 }
