@@ -3,6 +3,8 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Remarkable from 'remarkable'
 
+import NoMatch from '../components/NoMatch'
+
 class AnswerQuiz extends Component {
   state = {
     result: null,
@@ -51,6 +53,10 @@ class AnswerQuiz extends Component {
   }
 
   render() {
+    if (this.props.quiz == null) {
+      return <NoMatch />
+    }
+
     let element
     let quiz = (
       <div>
@@ -81,7 +87,7 @@ class AnswerQuiz extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => (
-  { quiz: state.pickedQuiz || state.quizzes.find(elem => elem.id === parseInt(ownProps.params.quizId, 10)) }
+  { quiz: state.pickedQuiz || state.quizzes.find(elem => elem.id === parseInt(ownProps.params.quizId, 10)) || null }
 )
 
 export default connect(
