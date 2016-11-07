@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { push } from 'react-router-redux'
 import Remarkable from 'remarkable'
 
 export default class QuizItem extends Component {
