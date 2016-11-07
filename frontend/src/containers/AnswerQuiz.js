@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Remarkable from 'remarkable'
 
-import NoMatch from '../components/NoMatch'
+import NotFound from '../components/NotFound'
 
 class AnswerQuiz extends Component {
   state = {
@@ -53,8 +53,8 @@ class AnswerQuiz extends Component {
   }
 
   render() {
-    if (this.props.quiz == null) {
-      return <NoMatch />
+    if (this.props.quiz === null) {
+      return <NotFound />
     }
 
     let element

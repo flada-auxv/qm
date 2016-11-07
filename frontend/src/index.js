@@ -14,7 +14,7 @@ import App from './containers/App'
 import QuizCMS from './containers/QuizCMS'
 import Home from './containers/Home'
 import AnswerQuiz from './containers/AnswerQuiz'
-import NoMatch from './components/NoMatch'
+import NotFound from './components/NotFound'
 
 const middleware = [ thunk, routerMiddleware(browserHistory) ]
 if (process.env.NODE_ENV !== 'production') {
@@ -36,7 +36,7 @@ render(
         <Route path="/quizzes/:quizId/answer" component={AnswerQuiz} />
       </Route>
       <Route path="/admin" component={QuizCMS} /* TODO: onEnter={requireAuth}*/ />
-      <Route path="*" component={NoMatch}/>
+      <Route path="*" component={NotFound}/>
     </Router>
   </Provider>,
   document.getElementById('root')
