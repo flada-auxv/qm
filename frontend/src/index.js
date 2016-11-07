@@ -12,7 +12,7 @@ import reducer from './reducers'
 // XXX: want to import all at once...
 import App from './containers/App'
 import QuizCMS from './containers/QuizCMS'
-import MainSection from './components/MainSection'
+import MainSection from './containers/MainSection'
 import AnswerQuiz from './containers/AnswerQuiz'
 import NoMatch from './components/NoMatch'
 

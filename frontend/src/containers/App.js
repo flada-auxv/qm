@@ -15,12 +15,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        { /* hmm... Should childen be container components in order to pass props to them?? */ }
-        {this.props.children && React.cloneElement(this.props.children, {
-          quizzes: this.props.quizzes,
-          answeringQuiz: this.props.answeringQuiz,
-          actions: this.props.actions
-        })}
+        {this.props.children}
       </div>
     )
   }
