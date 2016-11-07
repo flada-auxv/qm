@@ -12,7 +12,7 @@ import reducer from './reducers'
 // XXX: want to import all at once...
 import App from './containers/App'
 import QuizCMS from './containers/QuizCMS'
-import MainSection from './containers/MainSection'
+import Home from './containers/Home'
 import AnswerQuiz from './containers/AnswerQuiz'
 import NoMatch from './components/NoMatch'
 
@@ -32,7 +32,7 @@ render(
   <Provider store={store}>
     <Router history={history}>
       <Route path="/" component={App} >
-        <IndexRoute component={MainSection} />
+        <IndexRoute component={Home} />
         <Route path="/quizzes/:quizId/answer" component={AnswerQuiz} />
       </Route>
       <Route path="/admin" component={QuizCMS} /* TODO: onEnter={requireAuth}*/ />
