@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import Remarkable from 'remarkable'
 
-export default class AnswerQuiz extends Component {
+class AnswerQuiz extends Component {
   state = {
-    result: null
+    result: null,
+    answer: ''
   }
 
   getRawHTML = (text) => {
@@ -13,19 +16,25 @@ export default class AnswerQuiz extends Component {
 
   checkAnswer = (text) => {
     // TODO In cases wherein the answer is/contains a number, it should recognise the number as words
-    return text === this.props.quiz.correctAnswer
+    if (text === this.props.quiz.correctAnswer) {
+      this.setState({ result: 'correct' })
+    } else {
+      this.setState({ result: 'incorrect' })
+    }
+  }
+
+  handleInputChange = e => {
+    this.setState({ answer: e.target.value })
   }
 
   handleSubmit = e => {
-    const text = e.target.value.trim()
-
     if (e.which === 13) {
-      if (this.checkAnswer(text)) {
-        this.setState({ result: 'correct' })
-      } else {
-        this.setState({ result: 'incorrect' })
-      }
+      this.checkAnswer(e.target.value)
     }
+  }
+
+  handleClick = e => {
+    this.checkAnswer(this.state.answer)
   }
 
   resultText = () => {
@@ -46,7 +55,7 @@ export default class AnswerQuiz extends Component {
     let quiz = (
       <div>
         <div dangerouslySetInnerHTML={this.getRawHTML(`Q: ${this.props.quiz.content}`)} />
-        A: <input onKeyDown={this.handleSubmit} />
+        A: <input value={this.state.answer} onChange={this.handleInputChange} onKeyDown={this.handleSubmit} />
       </div>
     )
 
@@ -54,6 +63,7 @@ export default class AnswerQuiz extends Component {
       element = (
         <div>
           {quiz}
+          <p><button onClick={this.handleClick}>Check your answer!</button></p>
           <div>{this.resultText()}</div>
         </div>
       )
@@ -61,7 +71,7 @@ export default class AnswerQuiz extends Component {
       element = (
         <div>
           {quiz}
-          <p><button >Check your answer!</button></p>
+          <p><button onClick={this.handleClick}>Check your answer!</button></p>
         </div>
       )
     }
@@ -69,3 +79,11 @@ export default class AnswerQuiz extends Component {
     return element
   }
 }
+
+const mapStateToProps = (state, ownProps) => (
+  {quiz: state.answeringQuiz || state.quizzes.find(elem => elem.id === parseInt(ownProps.params.quizId, 10))
+})
+
+export default connect(
+  mapStateToProps
+)(AnswerQuiz)

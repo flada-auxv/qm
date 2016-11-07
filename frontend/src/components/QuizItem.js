@@ -9,7 +9,7 @@ export default class QuizItem extends Component {
   }
 
   handleClick = () => {
-    this.props.answerQuiz(this.props.quiz.id)
+    this.props.answerQuiz(this.props.quiz)
   }
 
   render() {

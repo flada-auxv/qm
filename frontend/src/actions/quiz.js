@@ -11,6 +11,7 @@ export const fetchQuizzesAsync = () => dispatch => {
     .then(json => dispatch(receiveQuizzes(json)))
 }
 
-export const answerQuiz = (id) => dispatch => {
-  dispatch({ type: 'ANSWER_QUIZ', id })
+export const answerQuiz = (quiz) => dispatch => {
+  dispatch({ type: 'ANSWER_QUIZ', quiz })
+  dispatch(push(`/quizzes/${quiz.id}/answer`))
 }

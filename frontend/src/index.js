@@ -13,8 +13,8 @@ import reducer from './reducers'
 import App from './containers/App'
 import QuizCMS from './containers/QuizCMS'
 import MainSection from './components/MainSection'
+import AnswerQuiz from './containers/AnswerQuiz'
 import NoMatch from './components/NoMatch'
-import AnswerQuiz from './AnswerQuiz'
 
 const middleware = [ thunk, routerMiddleware(browserHistory) ]
 if (process.env.NODE_ENV !== 'production') {
@@ -33,7 +33,7 @@ render(
     <Router history={history}>
       <Route path="/" component={App} >
         <IndexRoute component={MainSection} />
-        <Route path="/answer" component={AnswerQuiz}
+        <Route path="/quizzes/:quizId/answer" component={AnswerQuiz} />
       </Route>
       <Route path="/admin" component={QuizCMS} /* TODO: onEnter={requireAuth}*/ />
       <Route path="*" component={NoMatch}/>
