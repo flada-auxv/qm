@@ -1,6 +1,4 @@
-const initialState = []
-
-export default function quizzes(state = initialState, action) {
+export default function quizzes(state = [], action) {
   switch (action.type) {
     case 'ADD_QUIZ':
       return [

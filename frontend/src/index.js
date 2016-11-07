@@ -2,17 +2,21 @@ import React from 'react'
 import { render } from 'react-dom'
 import { createStore, applyMiddleware, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
-import { Router, Route, browserHistory } from 'react-router'
-import { syncHistoryWithStore, routerReducer, push } from 'react-router-redux'
+import { Router, Route, IndexRoute, browserHistory } from 'react-router'
+import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import createLogger from 'redux-logger'
 
 import reducer from './reducers'
 
+// XXX: want to import all at once...
 import App from './containers/App'
 import QuizCMS from './containers/QuizCMS'
+import MainSection from './components/MainSection'
+import NoMatch from './components/NoMatch'
+import AnswerQuiz from './AnswerQuiz'
 
-const middleware = [ thunk ]
+const middleware = [ thunk, routerMiddleware(browserHistory) ]
 if (process.env.NODE_ENV !== 'production') {
   middleware.push(createLogger())
 }
@@ -24,15 +28,15 @@ const store = createStore(
 
 const history = syncHistoryWithStore(browserHistory, store)
 
-if (window.location.pathname == '/admin') {
-  store.dispatch(push('/admin'))
-}
-
 render(
   <Provider store={store}>
     <Router history={history}>
-      <Route path="/" component={App} />
+      <Route path="/" component={App} >
+        <IndexRoute component={MainSection} />
+        <Route path="/answer" component={AnswerQuiz}
+      </Route>
       <Route path="/admin" component={QuizCMS} /* TODO: onEnter={requireAuth}*/ />
+      <Route path="*" component={NoMatch}/>
     </Router>
   </Provider>,
   document.getElementById('root')
