@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import Remarkable from 'remarkable'
+
+import sanitizeHTML from '../sanitizer'
 
 import NotFound from '../components/NotFound'
 
@@ -9,11 +10,6 @@ class AnswerQuiz extends Component {
   state = {
     result: null,
     answer: ''
-  }
-
-  getRawHTML = (text) => {
-    const md = new Remarkable({ html: true })
-    return { __html: md.render(text) }
   }
 
   checkAnswer = (text) => {
@@ -60,7 +56,7 @@ class AnswerQuiz extends Component {
     let element
     let quiz = (
       <div>
-        <div dangerouslySetInnerHTML={this.getRawHTML(`Q: ${this.props.quiz.content}`)} />
+        <div dangerouslySetInnerHTML={sanitizeHTML(`Q: ${this.props.quiz.content}`)} />
         A: <input value={this.state.answer} onChange={this.handleInputChange} onKeyDown={this.handleSubmit} />
       </div>
     )

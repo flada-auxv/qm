@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import Remarkable from 'remarkable'
+
+import sanitizeHTML from '../../sanitizer'
 
 export default class QuizItem extends Component {
   state = {
@@ -23,11 +24,6 @@ export default class QuizItem extends Component {
   handleBlur = (e) => {
     this.setState({ editing: null })
     this.props.editQuizAsync(this.props.quiz.id, this.state.content, this.state.correctAnswer)
-  }
-
-  getRawHTML = (text) => {
-    const md = new Remarkable({ html: true })
-    return { __html: md.render(text) }
   }
 
   componentDidUpdate = () => {
@@ -76,8 +72,8 @@ export default class QuizItem extends Component {
       element = (
         <div>
           <div>
-            <div onDoubleClick={this.handleContentDoubleClick} dangerouslySetInnerHTML={this.getRawHTML(`Q: ${this.state.content}`)} />
-            <div onDoubleClick={this.handleCorrectAnswerDoubleClick} dangerouslySetInnerHTML={this.getRawHTML(`A: ${this.state.correctAnswer}`)} />
+            <div onDoubleClick={this.handleContentDoubleClick} dangerouslySetInnerHTML={sanitizeHTML(`Q: ${this.state.content}`)} />
+            <div onDoubleClick={this.handleCorrectAnswerDoubleClick} dangerouslySetInnerHTML={sanitizeHTML(`A: ${this.state.correctAnswer}`)} />
           </div>
           <button onClick={() => this.props.deleteQuizAsync(quiz.id)}>X</button>
         </div>
