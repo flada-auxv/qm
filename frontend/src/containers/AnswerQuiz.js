@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import writtenNumber from 'written-number'
 
 import sanitizeHTML from '../sanitizer'
 
@@ -13,8 +14,10 @@ class AnswerQuiz extends Component {
   }
 
   checkAnswer = (text) => {
-    // TODO In cases wherein the answer is/contains a number, it should recognise the number as words
-    if (text === this.props.quiz.correctAnswer) {
+    const correctAnswer = this.props.quiz.correctAnswer
+    const replacedText = text.replace(/\d+/g, match => writtenNumber(match))
+
+    if (text === correctAnswer || replacedText === correctAnswer) {
       this.setState({ result: 'correct' })
     } else {
       this.setState({ result: 'incorrect' })
