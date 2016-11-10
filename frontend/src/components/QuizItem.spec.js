@@ -1,11 +1,12 @@
 import React from 'react'
 import { mount } from 'enzyme'
+
 import QuizItem from './QuizItem'
 
 function setup() {
   const props = {
-    answerQuiz: jest.fn(),
-    quiz: { content: '1+1' }
+    quiz: { content: '1+1' },
+    answerQuiz: jest.fn()
   }
 
   const enzymeWrapper = mount(<QuizItem {...props} />)

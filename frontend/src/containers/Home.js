@@ -11,7 +11,7 @@ class Home extends Component {
 
     return (
       <section className='main'>
-        <ul>
+        <ul className="quiz-list">
           {quizzes.map(quiz =>
             <QuizItem key={quiz.id} quiz={quiz} answerQuiz={actions.answerQuiz} />
           )}

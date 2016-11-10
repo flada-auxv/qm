@@ -7,7 +7,7 @@ import sanitizeHTML from '../sanitizer'
 
 import NotFound from '../components/NotFound'
 
-class AnswerQuiz extends Component {
+export class AnswerQuiz extends Component {
   state = {
     result: null,
     answer: ''
@@ -59,8 +59,8 @@ class AnswerQuiz extends Component {
     let element
     let quiz = (
       <div>
-        <div dangerouslySetInnerHTML={sanitizeHTML(`Q: ${this.props.quiz.content}`)} />
-        A: <input value={this.state.answer} onChange={this.handleInputChange} onKeyDown={this.handleSubmit} />
+        <div className="question" dangerouslySetInnerHTML={sanitizeHTML(`Q: ${this.props.quiz.content}`)} />
+        A: <input className= "answer" value={this.state.answer} onChange={this.handleInputChange} onKeyDown={this.handleSubmit} />
       </div>
     )
 
@@ -69,14 +69,14 @@ class AnswerQuiz extends Component {
         <div>
           {quiz}
           <p><button onClick={this.handleClick}>Check your answer!</button></p>
-          <div>{this.resultText()}</div>
+          <div className="result">{this.resultText()}</div>
         </div>
       )
     } else {
       element = (
         <div>
           {quiz}
-          <p><button onClick={this.handleClick}>Check your answer!</button></p>
+          <p><button className="checkAnswer" onClick={this.handleClick}>Check your answer!</button></p>
         </div>
       )
     }
@@ -85,9 +85,9 @@ class AnswerQuiz extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => (
-  { quiz: state.pickedQuiz || state.quizzes.find(elem => elem.id === parseInt(ownProps.params.quizId, 10)) || null }
-)
+const mapStateToProps = (state, ownProps) => {
+  return { quiz: state.pickedQuiz || state.quizzes.find(elem => elem.id === parseInt(ownProps.params.quizId, 10)) || null }
+}
 
 export default connect(
   mapStateToProps
