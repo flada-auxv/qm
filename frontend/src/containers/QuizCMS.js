@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import * as QuizActions from '../actions'
 import MainSection from '../components/admin/MainSection'
 
-class QuizCMS extends Component {
+export class QuizCMS extends Component {
   componentDidMount() {
     this.props.actions.fetchQuizzesAsync()
   }

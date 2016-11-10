@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import * as QuizActions from '../actions'
 
-class App extends Component {
+export class App extends Component {
   componentDidMount() {
     this.props.actions.fetchQuizzesAsync()
   }

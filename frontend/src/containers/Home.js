@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import * as QuizActions from '../actions'
 import QuizItem from '../components/QuizItem'
 
-class Home extends Component {
+export class Home extends Component {
   render() {
     const { quizzes, actions } = this.props
 
