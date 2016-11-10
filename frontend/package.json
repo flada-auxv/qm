@@ -19,6 +19,7 @@
     "chai": "^3.5.0",
     "enzyme": "^2.5.1",
     "react-addons-test-utils": "^15.3.2",
+    "rimraf": "^2.5.4",
     "webpack": "^1.13.3",
     "webpack-dev-server": "^1.16.2",
     "webpack-manifest-plugin": "^1.1.0"
@@ -41,7 +42,10 @@
   },
   "scripts": {
     "development": "NODE_ENV=development webpack-dev-server --config config/development/webpack.config.js --progress --colors --inline --hot",
+    "webpack": "NODE_ENV=production webpack --config config/production/webpack.config.js --progress --colors",
+    "clean": "rimraf ../public/assets",
+    "build": "yarn run clean && yarn run webpack",
     "test": "jest",
-    "test:watch": "npm test -- --watch"
+    "test:watch": "yarn run test -- --watch"
   }
 }

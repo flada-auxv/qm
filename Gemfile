@@ -21,6 +21,9 @@ end
 group :test do
   gem 'rspec-rails'
   gem 'rspec-json_matcher'
+  gem 'capybara'
+  gem 'poltergeist'
+  gem 'launchy'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
