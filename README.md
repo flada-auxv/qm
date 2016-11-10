@@ -1,24 +1,42 @@
-# README
+# QuizMaster
+## Prerequisites
+- [Ruby](https://github.com/ruby/ruby)
+- [Bundler](https://github.com/bundler/bundler)
+- [Node.js](https://github.com/nodejs/node)
+- [Yarn](https://github.com/yarnpkg/yarn)
+- [PostgreSQL](https://www.postgresql.org/)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Setup
+### development
+```
+bundler install
+cd frontend && yarn install
 
-Things you may want to cover:
+bin/rake db:setup
 
-* Ruby version
+# only production
+createuser --createdb --pwprompt quiz_master
+RAILS_ENV=production bin/rake db:setup
+```
 
-* System dependencies
+## Run
+### development
+```sh
+cd frontend/ && yarn run development
 
-* Configuration
+# open another terminal window, then
+bin/rails s
+```
 
-* Database creation
+### production
+```sh
+cd frontend/
+yarn run build
 
-* Database initialization
+cd -
+SECRET_KEY_BASE=$(bin/rake secret) QUIZ_MASTER_DATABASE_PASSWORD=password RAILS_SERVE_STATIC_FILES=true RAILS_ENV=production bin/rails s
+```
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Sitemaps
+'/' => Quiz mode
+'/admin' => Manage questions
