@@ -34,4 +34,11 @@ module.exports = {
   devServer: {
     contentBase: '../../../public/assets',
   },
+  // FIXME: to use jsdom in browser. What else can I do??
+  node: {
+    fs: "empty",
+    net: "empty",
+    tls: "empty",
+    child_process: "empty"
+  },
 }
