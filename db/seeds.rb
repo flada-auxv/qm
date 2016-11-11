@@ -1,7 +1,5 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+include FactoryGirl::Syntax::Methods
+
+create(:quiz, content: 'How old is <script>alert("＼Akkariin／")</script>Akari?', correct_answer: 'thirteen')
+create(:quiz, content: 'Which flavor of <b>Potate chips</b> does Akari like?', correct_answer: 'lightly salt')
+create(:quiz, content: '<span style="background-color: red">How many members in Goraku-bu?</span>', correct_answer: 'four')
