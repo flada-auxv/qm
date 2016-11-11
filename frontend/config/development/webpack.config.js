@@ -23,6 +23,10 @@ module.exports = {
         loader: 'json-loader'
       },
     ],
+    noParse: [
+      /node_modules\/acorn\/dist\/acorn.js/,
+      /node_modules\/acorn\/dist\/walk.js/
+    ]
   },
   plugins: [
     new webpack.DefinePlugin({
