@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Card, CardText } from 'material-ui';
+
 import sanitizeHTML from '../sanitizer'
 
 export default class QuizItem extends Component {
@@ -8,7 +10,9 @@ export default class QuizItem extends Component {
 
   render() {
     return (
-      <li onClick={this.handleClick} dangerouslySetInnerHTML={sanitizeHTML(this.props.quiz.content)} />
+      <Card onClick={this.handleClick}>
+        <CardText dangerouslySetInnerHTML={sanitizeHTML(this.props.quiz.content)} />
+      </Card>
     )
   }
 }

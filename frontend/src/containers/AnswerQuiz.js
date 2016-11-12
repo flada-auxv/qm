@@ -2,9 +2,12 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import writtenNumber from 'written-number'
+import { Card, CardHeader, CardText, CardActions, TextField, FlatButton } from 'material-ui';
 
 import sanitizeHTML from '../sanitizer'
 
+import CheckAnswer from '../components/CheckAnswer'
+import Result from '../components/Result'
 import NotFound from '../components/NotFound'
 
 export class AnswerQuiz extends Component {
@@ -38,50 +41,30 @@ export class AnswerQuiz extends Component {
     this.checkAnswer(this.state.answer)
   }
 
-  resultText = () => {
-    let text
-    switch (this.state.result) {
-      case 'correct':
-        text = 'O Correct!!'
-        break
-      case 'incorrect':
-        text = 'X Incorrect!!'
-        break
-    }
-    return text
-  }
-
   render() {
     if (this.props.quiz === null) {
       return <NotFound />
     }
 
-    let element
-    let quiz = (
-      <div>
-        <div className="question" dangerouslySetInnerHTML={sanitizeHTML(`Q: ${this.props.quiz.content}`)} />
-        A: <input className= "answer" value={this.state.answer} onChange={this.handleInputChange} onKeyDown={this.handleSubmit} />
-      </div>
+    return (
+      <Card>
+        <CardHeader>
+          <div className="question" dangerouslySetInnerHTML={sanitizeHTML(this.props.quiz.content)} />
+        </CardHeader>
+        <CardText>
+          <TextField
+            hintText="your answer"
+            className= "answer"
+            value={this.state.answer}
+            onChange={this.handleInputChange}
+            onKeyDown={this.handleSubmit} />
+        </CardText>
+        <CardActions>
+          <FlatButton className="checkAnswer" label={"Check the answer!"} onClick={this.handleClick} />
+          <Result result={this.state.result} />
+        </CardActions>
+      </Card>
     )
-
-    if (this.state.result) {
-      element = (
-        <div>
-          {quiz}
-          <p><button onClick={this.handleClick}>Check your answer!</button></p>
-          <div className="result">{this.resultText()}</div>
-        </div>
-      )
-    } else {
-      element = (
-        <div>
-          {quiz}
-          <p><button className="checkAnswer" onClick={this.handleClick}>Check your answer!</button></p>
-        </div>
-      )
-    }
-
-    return element
   }
 }
 

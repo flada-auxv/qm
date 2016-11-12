@@ -15,6 +15,6 @@ export default function Result(props) {
   }
 
   return (
-    <div className="result">{result()}</div>
+    <span className="result">{result()}</span>
   )
 }
