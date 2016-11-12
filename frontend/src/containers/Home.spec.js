@@ -4,6 +4,9 @@ import { mount } from 'enzyme'
 import { Home } from './Home'
 import QuizItem from '../components/QuizItem'
 
+import { MuiThemeProvider } from 'material-ui'
+import injectTapEventPlugin from 'react-tap-event-plugin'
+injectTapEventPlugin();
 
 const setup = propOverrides => {
   const props = Object.assign({
@@ -16,7 +19,11 @@ const setup = propOverrides => {
     }
   }, propOverrides)
 
-  const enzymeWrapper = mount(<Home {...props} />)
+  const enzymeWrapper = mount(
+    <MuiThemeProvider>
+      <Home {...props} />
+    </MuiThemeProvider>
+  )
 
   return {
     props,
