@@ -21,25 +21,23 @@ describe('AnswerQuiz', () => {
   it('should render question and empty input for answer', () => {
     const { enzymeWrapper } = setup()
 
-    expect(enzymeWrapper.find('.question').props().dangerouslySetInnerHTML.__html).toBe('Q: 1+1')
+    expect(enzymeWrapper.find('.question').props().dangerouslySetInnerHTML.__html).toBe('1+1')
     expect(enzymeWrapper.find('.answer').props().value).toBe('')
   })
 
-  it('should render result when click button of check the answer', () => {
+  it('should set result when click button of check the answer', () => {
     const { enzymeWrapper } = setup()
-
-    expect(enzymeWrapper.find('.result').length).toBe(0)
 
     const answerInput = enzymeWrapper.find('.answer')
     const checkAnswer = enzymeWrapper.find('.checkAnswer')
 
     answerInput.simulate('change', { target: { value: 'hi' } })
     checkAnswer.simulate('click')
-    expect(enzymeWrapper.find('.result').text()).toBe('X Incorrect!!')
+    expect(enzymeWrapper.state().result).toBe('incorrect')
 
     answerInput.simulate('change', { target: { value: '2' } })
     checkAnswer.simulate('click')
-    expect(enzymeWrapper.find('.result').text()).toBe('O Correct!!')
+    expect(enzymeWrapper.state().result).toBe('correct')
   })
 
   it('should recognise the number as words', () => {
@@ -52,11 +50,11 @@ describe('AnswerQuiz', () => {
 
     answerInput.simulate('change', { target: { value: 'thirteen' } })
     checkAnswer.simulate('click')
-    expect(enzymeWrapper.find('.result').text()).toBe('O Correct!!')
+    expect(enzymeWrapper.state().result).toBe('correct')
 
     answerInput.simulate('change', { target: { value: '13' } })
     checkAnswer.simulate('click')
-    expect(enzymeWrapper.find('.result').text()).toBe('O Correct!!')
+    expect(enzymeWrapper.state().result).toBe('correct')
   })
 
   it ('should render NotFound when quiz is null', () => {

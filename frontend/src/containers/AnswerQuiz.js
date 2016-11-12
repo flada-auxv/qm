@@ -2,18 +2,18 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import writtenNumber from 'written-number'
-import { Card, CardHeader, CardText, CardActions, TextField, FlatButton } from 'material-ui';
+import { Card, CardHeader, CardText, CardActions, TextField, FlatButton, Dialog } from 'material-ui';
 
 import sanitizeHTML from '../sanitizer'
 
-import CheckAnswer from '../components/CheckAnswer'
 import Result from '../components/Result'
 import NotFound from '../components/NotFound'
 
 export class AnswerQuiz extends Component {
   state = {
     result: null,
-    answer: ''
+    answer: '',
+    dialogOpen: false
   }
 
   checkAnswer = (text) => {
@@ -21,9 +21,9 @@ export class AnswerQuiz extends Component {
     const replacedText = text.replace(/\d+/g, match => writtenNumber(match))
 
     if (text === correctAnswer || replacedText === correctAnswer) {
-      this.setState({ result: 'correct' })
+      this.setState({ result: 'correct', dialogOpen: true })
     } else {
-      this.setState({ result: 'incorrect' })
+      this.setState({ result: 'incorrect', dialogOpen: true })
     }
   }
 
@@ -41,10 +41,26 @@ export class AnswerQuiz extends Component {
     this.checkAnswer(this.state.answer)
   }
 
+  handleClose = () => {
+    this.setState({ dialogOpen: false });
+  };
+
   render() {
     if (this.props.quiz === null) {
       return <NotFound />
     }
+
+    const dialog = (
+      <Dialog
+        title="Result"
+        actions={<FlatButton label="Close" primary={true} onTouchTap={this.handleClose} />}
+        modal={false}
+        open={this.state.dialogOpen}
+        onRequestClose={this.handleClose}
+      >
+        <Result result={this.state.result} />
+      </Dialog>
+    )
 
     return (
       <Card>
@@ -61,8 +77,8 @@ export class AnswerQuiz extends Component {
         </CardText>
         <CardActions>
           <FlatButton className="checkAnswer" label={"Check the answer!"} onClick={this.handleClick} />
-          <Result result={this.state.result} />
         </CardActions>
+        {dialog}
       </Card>
     )
   }
