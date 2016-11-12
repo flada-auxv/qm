@@ -60,10 +60,12 @@ export class AnswerQuiz extends Component {
         <CardText>
           <TextField
             hintText="your answer"
-            className= "answer"
+            className="answer"
             value={this.state.answer}
             onChange={this.handleInputChange}
-            onKeyDown={this.handleSubmit} />
+            onKeyDown={this.handleSubmit}
+            autoFocus={true}
+          />
         </CardText>
         <CardActions>
           <FlatButton className="checkAnswer" label={"Check the answer!"} onClick={this.handleClick} />
