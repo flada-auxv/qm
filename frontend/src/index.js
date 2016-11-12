@@ -7,9 +7,8 @@ import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import createLogger from 'redux-logger'
 
-// for material-ui
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import injectTapEventPlugin from 'react-tap-event-plugin';
+import { MuiThemeProvider, getMuiTheme } from 'material-ui'
+import injectTapEventPlugin from 'react-tap-event-plugin'
 injectTapEventPlugin();
 
 import reducer from './reducers'
@@ -34,7 +33,7 @@ const store = createStore(
 const history = syncHistoryWithStore(browserHistory, store)
 
 render(
-  <MuiThemeProvider>
+  <MuiThemeProvider muiTheme={getMuiTheme()}>
     <Provider store={store}>
       <Router history={history}>
         <Route path="/" component={App} >

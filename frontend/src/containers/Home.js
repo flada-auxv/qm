@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { List } from 'material-ui'
 
 import * as QuizActions from '../actions'
 import QuizItem from '../components/QuizItem'
@@ -10,12 +11,12 @@ export class Home extends Component {
     const { quizzes, actions } = this.props
 
     return (
-      <section className='main'>
-        <ul className="quiz-list">
+      <section className="main">
+        <List className="quiz-list">
           {quizzes.map(quiz =>
             <QuizItem key={quiz.id} quiz={quiz} answerQuiz={actions.answerQuiz} />
           )}
-        </ul>
+        </List>
       </section>
     )
   }

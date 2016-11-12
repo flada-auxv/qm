@@ -1,5 +1,8 @@
 import React from 'react'
 import { mount } from 'enzyme'
+import { MuiThemeProvider, ListItem } from 'material-ui'
+import injectTapEventPlugin from 'react-tap-event-plugin'
+injectTapEventPlugin();
 
 import QuizItem from './QuizItem'
 
@@ -9,7 +12,11 @@ function setup() {
     answerQuiz: jest.fn()
   }
 
-  const enzymeWrapper = mount(<QuizItem {...props} />)
+  const enzymeWrapper = mount(
+    <MuiThemeProvider>
+      <QuizItem {...props} />
+    </MuiThemeProvider>
+  )
 
   return {
     props,
@@ -20,14 +27,14 @@ function setup() {
 describe('QuizItem', () => {
   it('should render self', () => {
     const { enzymeWrapper } = setup()
-    expect(enzymeWrapper.find('li').text()).toBe('1+1')
+    expect(enzymeWrapper.find('.question').text()).toBe('1+1')
   })
 
   it('should call answerQuiz', () => {
     const { enzymeWrapper, props } = setup()
-    const li = enzymeWrapper.find('li')
+    const listItem = enzymeWrapper.find(ListItem)
     expect(props.answerQuiz.mock.calls.length).toBe(0)
-    li.props().onClick()
+    listItem.props().onClick()
     expect(props.answerQuiz.mock.calls.length).toBe(1)
   })
 })

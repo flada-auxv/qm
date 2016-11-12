@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, CardText } from 'material-ui';
+import { ListItem, FontIcon } from 'material-ui'
 
 import sanitizeHTML from '../sanitizer'
 
@@ -9,10 +9,17 @@ export default class QuizItem extends Component {
   }
 
   render() {
+    sanitizeHTML(this.props.quiz.content)
+
+    const text = (
+      <span>
+        <FontIcon className="fa fa-question" style={{ marginRight: 15 }}/>
+        <span className="question" dangerouslySetInnerHTML={sanitizeHTML(this.props.quiz.content)} />
+      </span>
+    )
+
     return (
-      <Card onClick={this.handleClick}>
-        <CardText dangerouslySetInnerHTML={sanitizeHTML(this.props.quiz.content)} />
-      </Card>
+      <ListItem primaryText={text} onClick={this.handleClick} />
     )
   }
 }
