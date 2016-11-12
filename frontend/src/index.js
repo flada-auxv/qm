@@ -7,7 +7,9 @@ import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import createLogger from 'redux-logger'
 
-import { MuiThemeProvider, getMuiTheme } from 'material-ui'
+
+import { MuiThemeProvider } from 'material-ui'
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 injectTapEventPlugin();
 
