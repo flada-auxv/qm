@@ -19,11 +19,11 @@ const setup = propOverrides => {
 describe('Result', () => {
   it('should render correct', () => {
     const { enzymeWrapper } = setup({ result: 'correct' })
-    expect(enzymeWrapper.text()).toBe('O Correct!!')
+    expect(enzymeWrapper.text()).toMatch(/Correct/)
   })
 
   it('should render incorerct', () => {
     const { enzymeWrapper } = setup({ result: 'incorrect' })
-    expect(enzymeWrapper.text()).toBe('X Incorrect!!')
+    expect(enzymeWrapper.text()).toMatch(/Incorrect/)
   })
 })
