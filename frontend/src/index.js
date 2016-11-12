@@ -7,6 +7,11 @@ import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import createLogger from 'redux-logger'
 
+// for material-ui
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
+
 import reducer from './reducers'
 
 // XXX: want to import all at once...
@@ -29,15 +34,17 @@ const store = createStore(
 const history = syncHistoryWithStore(browserHistory, store)
 
 render(
-  <Provider store={store}>
-    <Router history={history}>
-      <Route path="/" component={App} >
-        <IndexRoute component={Home} />
-        <Route path="/quizzes/:quizId/answer" component={AnswerQuiz} />
-      </Route>
-      <Route path="/admin" component={QuizCMS} /* TODO: onEnter={requireAuth}*/ />
-      <Route path="*" component={NotFound}/>
-    </Router>
-  </Provider>,
+  <MuiThemeProvider>
+    <Provider store={store}>
+      <Router history={history}>
+        <Route path="/" component={App} >
+          <IndexRoute component={Home} />
+          <Route path="/quizzes/:quizId/answer" component={AnswerQuiz} />
+        </Route>
+        <Route path="/admin" component={QuizCMS} /* TODO: onEnter={requireAuth}*/ />
+        <Route path="*" component={NotFound}/>
+      </Router>
+    </Provider>
+  </MuiThemeProvider>,
   document.getElementById('root')
 )
