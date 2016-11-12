@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import writtenNumber from 'written-number'
-import { Card, CardHeader, CardText, CardActions, TextField, FlatButton, Dialog } from 'material-ui';
+import { Card, CardHeader, CardText, CardActions, TextField, FlatButton, Dialog } from 'material-ui'
 
 import sanitizeHTML from '../sanitizer'
 
@@ -22,8 +22,10 @@ export class AnswerQuiz extends Component {
 
     if (text === correctAnswer || replacedText === correctAnswer) {
       this.setState({ result: 'correct', dialogOpen: true })
+      setTimeout(() => this.setState({ dialogOpen: false }), 2000) // FIXME: Is there a better way?
     } else {
       this.setState({ result: 'incorrect', dialogOpen: true })
+      setTimeout(() => this.setState({ dialogOpen: false }), 2000)
     }
   }
 
@@ -50,18 +52,6 @@ export class AnswerQuiz extends Component {
       return <NotFound />
     }
 
-    const dialog = (
-      <Dialog
-        title="Result"
-        actions={<FlatButton label="Close" primary={true} onTouchTap={this.handleClose} />}
-        modal={false}
-        open={this.state.dialogOpen}
-        onRequestClose={this.handleClose}
-      >
-        <Result result={this.state.result} />
-      </Dialog>
-    )
-
     return (
       <Card>
         <CardHeader>
@@ -78,7 +68,15 @@ export class AnswerQuiz extends Component {
         <CardActions>
           <FlatButton className="checkAnswer" label={"Check the answer!"} onClick={this.handleClick} />
         </CardActions>
-        {dialog}
+        <Dialog
+          className="resultDialog"
+          title="Result"
+          modal={false}
+          open={this.state.dialogOpen}
+          onRequestClose={this.handleClose}
+        >
+          <Result result={this.state.result} />
+        </Dialog>
       </Card>
     )
   }

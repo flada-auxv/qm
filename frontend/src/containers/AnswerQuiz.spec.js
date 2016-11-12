@@ -2,6 +2,8 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import { AnswerQuiz } from './AnswerQuiz'
+import Dialog from 'material-ui'
+import Result from '../components/Result'
 import NotFound from '../components/NotFound'
 
 const setup = propOverrides => {
@@ -23,6 +25,18 @@ describe('AnswerQuiz', () => {
 
     expect(enzymeWrapper.find('.question').props().dangerouslySetInnerHTML.__html).toBe('1+1')
     expect(enzymeWrapper.find('.answer').props().value).toBe('')
+  })
+
+  it('should render <Dialog> including <Result> ', () => {
+    const { enzymeWrapper } = setup()
+
+    expect(enzymeWrapper.find('.resultDialog').props().open).toBe(false)
+
+    enzymeWrapper.find('.checkAnswer').simulate('click')
+
+    const dialog = enzymeWrapper.find('.resultDialog')
+    expect(dialog.props().open).toBe(true)
+    expect(dialog.find(Result).length).toBe(1)
   })
 
   it('should set result when click button of check the answer', () => {
