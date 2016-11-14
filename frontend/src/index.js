@@ -20,6 +20,8 @@ import App from './containers/App'
 import QuizCMS from './containers/QuizCMS'
 import Home from './components/Home'
 import AnswerQuiz from './components/AnswerQuiz'
+import AddQuizItem from './components/admin/AddQuizItem'
+import MainSection from './components/admin/MainSection'
 import NotFound from './components/NotFound'
 
 const middleware = [ thunk, routerMiddleware(browserHistory) ]
@@ -42,7 +44,9 @@ render(
           <IndexRoute component={Home} />
           <Route path="quizzes/:quizId" component={AnswerQuiz} />
         </Route>
-        <Route path="/admin" component={QuizCMS} /* TODO: onEnter={requireAuth}*/ />
+        <Route path="admin" component={QuizCMS} /* TODO: onEnter={requireAuth}*/ >
+          <IndexRoute component={MainSection} />
+        </Route>
         <Route path="*" component={NotFound}/>
       </Router>
     </Provider>
