@@ -13,5 +13,5 @@ export const fetchQuizzesAsync = () => dispatch => {
 
 export const answerQuiz = (quiz) => dispatch => {
   dispatch({ type: 'ANSWER_QUIZ', quiz })
-  dispatch(push(`/quizzes/${quiz.id}/answer`))
+  dispatch(push(`/quizzes/${quiz.id}`))
 }

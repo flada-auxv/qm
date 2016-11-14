@@ -40,7 +40,7 @@ render(
       <Router history={history}>
         <Route path="/" component={App} >
           <IndexRoute component={Home} />
-          <Route path="/quizzes/:quizId/answer" component={AnswerQuiz} />
+          <Route path="quizzes/:quizId" component={AnswerQuiz} />
         </Route>
         <Route path="/admin" component={QuizCMS} /* TODO: onEnter={requireAuth}*/ />
         <Route path="*" component={NotFound}/>
