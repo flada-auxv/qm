@@ -10,6 +10,9 @@ export default function quizzes(state = [], action) {
         ...state
       ]
     case 'EDIT_QUIZ':
+      // FIXME: It's not reflected unless window-reload(API call is correct)
+      // First, Action creator return {type: 'EDIT_QUIZ', 3, "hi", "hi" }
+      // but this(reducer) received {type: "EDIT_QUIZ", id: "hi", content: "hi", correctAnswer: undefined}, why?
       return state.map(quiz =>
         quiz.id === action.id ? { ...quiz, content: action.content, correctAnswer: action.correctAnswer } : quiz
       )

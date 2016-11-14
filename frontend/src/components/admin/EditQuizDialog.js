@@ -1,30 +1,24 @@
 import React, { Component } from 'react'
 import { Dialog, FlatButton, TextField } from 'material-ui'
 
-export default class AddQuizDialog extends Component {
+export default class EditQuizDialog extends Component {
   state = {
-    open: false,
-    content: '',
-    correctAnswer: ''
-  }
-
-  handleOpen = () => {
-    this.setState({ open: true });
+    content: this.props.editingQuiz.content,
+    correctAnswer: this.props.editingQuiz.correctAnswer
   }
 
   handleSubmit = () => {
-    this.props.addQuizAsync(this.state.content, this.state.correctAnswer)
-    this.setState({ open: false, content: '', correctAnswer: '' });
+    this.props.editQuizAsync(this.props.editingQuiz.id, this.state.content, this.state.correctAnswer)
+    this.props.handleClose()
   }
 
   handleCancel = () => {
-    this.setState({ open: false, content: '', correctAnswer: '' });
+    this.props.handleClose()
   }
 
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value })
   }
-
 
   render() {
     const actions = [
@@ -42,13 +36,12 @@ export default class AddQuizDialog extends Component {
     ]
 
     return (
-      <div className="add-quiz-dialog">
-        <FlatButton label="Add new quiz" onTouchTap={this.handleOpen} />
+      <div className="edit-quiz-dialog" onClick={this.handleOpen}>
         <Dialog
-          title="Add new quiz"
+          title="Edit quiz"
           actions={actions}
-          open={this.state.open}
-          onRequestClose={this.handleClose}
+          open={this.props.open}
+          onRequestClose={this.props.handleClose}
         >
           <div>
             <TextField
