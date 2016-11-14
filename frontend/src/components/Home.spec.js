@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount } from 'enzyme'
 
-import { Home } from './Home'
+import Home from './Home'
 import QuizItem from '../components/QuizItem'
 
 import { MuiThemeProvider } from 'material-ui'

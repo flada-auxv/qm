@@ -14,13 +14,20 @@ export class App extends Component {
     return (
       <div>
         <Header />
-        {this.props.children}
+        {this.props.children && React.cloneElement(this.props.children, {
+          pickedQuiz: this.props.pickedQuiz,
+          quizzes: this.props.quizzes,
+          actions: this.props.actions
+        })}
       </div>
     )
   }
 }
 
-const mapStateToProps = state => ({})
+const mapStateToProps = state => ({
+  pickedQuiz: state.pickedQuiz,
+  quizzes: state.quizzes
+})
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(QuizActions, dispatch)

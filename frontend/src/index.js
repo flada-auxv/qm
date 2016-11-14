@@ -18,8 +18,8 @@ import reducer from './reducers'
 // XXX: want to import all at once...
 import App from './containers/App'
 import QuizCMS from './containers/QuizCMS'
-import Home from './containers/Home'
-import AnswerQuiz from './containers/AnswerQuiz'
+import Home from './components/Home'
+import AnswerQuiz from './components/AnswerQuiz'
 import NotFound from './components/NotFound'
 
 const middleware = [ thunk, routerMiddleware(browserHistory) ]

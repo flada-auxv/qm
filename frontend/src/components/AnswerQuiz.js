@@ -1,15 +1,13 @@
 import React, { Component } from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
 import writtenNumber from 'written-number'
 import { Card, CardHeader, CardText, CardActions, TextField, FlatButton, Dialog } from 'material-ui'
 
 import sanitizeHTML from '../sanitizer'
 
-import Result from '../components/Result'
-import NotFound from '../components/NotFound'
+import Result from './Result'
+import NotFound from './NotFound'
 
-export class AnswerQuiz extends Component {
+export default class AnswerQuiz extends Component {
   state = {
     result: null,
     answer: '',
@@ -17,7 +15,7 @@ export class AnswerQuiz extends Component {
   }
 
   checkAnswer = (text) => {
-    const correctAnswer = this.props.quiz.correctAnswer
+    const correctAnswer = this.props.pickedQuiz.correctAnswer
     const replacedText = text.replace(/\d+/g, match => writtenNumber(match))
 
     if (text === correctAnswer || replacedText === correctAnswer) {
@@ -48,14 +46,14 @@ export class AnswerQuiz extends Component {
   };
 
   render() {
-    if (this.props.quiz === null) {
+    if (this.props.pickedQuiz === null) {
       return <NotFound />
     }
 
     return (
       <Card>
         <CardHeader>
-          <div className="question" dangerouslySetInnerHTML={sanitizeHTML(this.props.quiz.content)} />
+          <div className="question" dangerouslySetInnerHTML={sanitizeHTML(this.props.pickedQuiz.content)} />
         </CardHeader>
         <CardText>
           <TextField
@@ -83,11 +81,3 @@ export class AnswerQuiz extends Component {
     )
   }
 }
-
-const mapStateToProps = (state, ownProps) => {
-  return { quiz: state.pickedQuiz || state.quizzes.find(elem => elem.id === parseInt(ownProps.params.quizId, 10)) || null }
-}
-
-export default connect(
-  mapStateToProps
-)(AnswerQuiz)

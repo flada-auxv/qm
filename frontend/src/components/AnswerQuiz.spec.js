@@ -1,14 +1,14 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-
-import { AnswerQuiz } from './AnswerQuiz'
 import Dialog from 'material-ui'
-import Result from '../components/Result'
-import NotFound from '../components/NotFound'
+
+import AnswerQuiz from './AnswerQuiz'
+import Result from './Result'
+import NotFound from './NotFound'
 
 const setup = propOverrides => {
   const props = Object.assign({
-    quiz: { id: 1, content: '1+1', correctAnswer: '2' }
+    pickedQuiz: { id: 1, content: '1+1', correctAnswer: '2' }
   }, propOverrides)
 
   const enzymeWrapper = shallow(<AnswerQuiz {...props} />)
@@ -56,7 +56,7 @@ describe('AnswerQuiz', () => {
 
   it('should recognise the number as words', () => {
     const { enzymeWrapper } = setup({
-      quiz: { id: 1, content: 'How old is Akari?', correctAnswer: 'thirteen'  }
+      pickedQuiz: { id: 1, content: 'How old is Akari?', correctAnswer: 'thirteen'  }
     })
 
     const answerInput = enzymeWrapper.find('.answer')
@@ -71,8 +71,8 @@ describe('AnswerQuiz', () => {
     expect(enzymeWrapper.state().result).toBe('correct')
   })
 
-  it ('should render NotFound when quiz is null', () => {
-    const { enzymeWrapper } = setup({ quiz: null })
+  it ('should render NotFound when pickedQuiz is null', () => {
+    const { enzymeWrapper } = setup({ pickedQuiz: null })
 
     enzymeWrapper.find(<NotFound />)
   })
