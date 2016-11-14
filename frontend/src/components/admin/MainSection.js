@@ -9,7 +9,6 @@ export default class MainSection extends Component {
 
     return (
       <section className='main'>
-        <h1>QuizMaster</h1>
         <AddQuizItem addQuizAsync={actions.addQuizAsync} />
         <div className='quiz-list'>
           {quizzes.map(quiz =>

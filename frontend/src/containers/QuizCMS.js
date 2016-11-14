@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 import * as QuizActions from '../actions'
 import MainSection from '../components/admin/MainSection'
+import Header from '../components/Header'
 
 export class QuizCMS extends Component {
   componentDidMount() {
@@ -13,6 +14,7 @@ export class QuizCMS extends Component {
   render() {
     return (
       <div>
+        <Header />
         <MainSection quizzes={this.props.quizzes} actions={this.props.actions} />
       </div>
     )
