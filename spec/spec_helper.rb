@@ -21,6 +21,14 @@ RSpec.configure do |config|
     config.default_formatter = 'doc'
   end
 
+  config.before(:suite) do
+    DatabaseRewinder.clean_all
+  end
+
+  config.after(:each) do
+    DatabaseRewinder.clean
+  end
+
   config.include FactoryGirl::Syntax::Methods
   config.include RSpec::JsonMatcher
 end

@@ -21,6 +21,7 @@ end
 group :test do
   gem 'rspec-rails'
   gem 'rspec-json_matcher'
+  gem 'database_rewinder'
   gem 'capybara'
   gem 'poltergeist'
   gem 'launchy'
